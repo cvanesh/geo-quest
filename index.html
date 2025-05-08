@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geo Quest</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4285f4">
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1 id="app-title" class="clickable">Geo Quest</h1>
+    </header>
+    
+    <main>
+      <div id="home-screen" class="screen active">
+        <h2>Welcome to Geo Quest!</h2>
+        <p>Test your knowledge of country flags around the world.</p>
+        
+        <!-- In the home screen section -->
+        <div class="home-options">
+          <div class="card quiz-card" id="go-to-quiz">
+            <div class="card-icon">🎮</div>
+            <h3>Take Quiz</h3>
+            <p>Test your flag knowledge</p>
+          </div>
+          
+          <div class="card countries-card" id="go-to-countries">
+            <div class="card-icon">🌎</div>
+            <h3>Countries</h3>
+            <p>Browse countries</p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="welcome-screen" class="screen">
+        <h2>Geo Quest</h2>
+        <p>How many flags would you like to identify?</p>
+        
+        <div class="flag-count-selector">
+          <button class="flag-count-btn" data-count="5">5</button>
+          <button class="flag-count-btn" data-count="10">10</button>
+          <button class="flag-count-btn" data-count="20">20</button>
+          <button class="flag-count-btn" data-count="all">All</button>
+        </div>
+        
+        <div class="continent-filter">
+          <label for="continent-selector">Filter by continent:</label>
+          <select id="continent-selector">
+            <option value="all">All Continents</option>
+            <!-- Continents will be populated by JavaScript -->
+          </select>
+        </div>
+        
+        <div class="letter-filter">
+          <label for="letter-selector">Filter by starting letter:</label>
+          <select id="letter-selector">
+            <option value="all">All Letters</option>
+            <!-- Letters will be populated by JavaScript -->
+          </select>
+        </div>
+        
+        <div class="filter-group checkbox-filter">
+          <input type="checkbox" id="quiz-official-countries-only" checked>
+          <label for="quiz-official-countries-only">Show official countries only</label>
+        </div>
+        
+        <button id="start-quiz-btn" class="primary-btn" disabled>Start Quiz</button>
+      </div>
+      
+      <div id="quiz-screen" class="screen">
+        <div class="quiz-info">
+          <div class="progress">
+            <span id="current-flag">1</span>/<span id="total-flags">10</span>
+          </div>
+        </div>
+        
+        <div class="flag-container">
+          <img id="flag-image" src="" alt="Country Flag">
+        </div>
+        
+        <div id="country-info-container">
+          <div id="country-info" class="hidden">
+            <h2 id="country-name"></h2>
+            <p>Capital: <span id="country-capital"></span></p>
+            <p>Continent: <span id="country-continent"></span></p>
+          </div>
+        </div>
+        
+        <button id="next-flag-btn" class="primary-btn hidden">Next Flag</button>
+      </div>
+      
+      <div id="results-screen" class="screen">
+        <h2>Quiz Complete!</h2>
+        <p>You've completed the flag quiz!</p>
+        <p>Keep practicing to learn more country flags.</p>
+        <button id="play-again-btn" class="primary-btn">Play Again</button>
+        <button id="go-home-btn" class="secondary-btn">Go Home</button>
+      </div>
+      
+      <!-- In the countries-screen section -->
+      <div id="countries-screen" class="screen">
+        <h2>Browse Countries</h2>
+        
+        <div class="filter-container">
+          <div class="filter-group">
+            <label for="country-continent-filter">Filter by continent:</label>
+            <select id="country-continent-filter">
+              <option value="all">All Continents</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="country-letter-filter">Filter by starting letter:</label>
+            <select id="country-letter-filter">
+              <option value="all">All Letters</option>
+            </select>
+          </div>
+          
+          <div class="filter-group checkbox-filter">
+            <input type="checkbox" id="official-countries-only" checked>
+            <label for="official-countries-only">Show official countries only</label>
+          </div>
+        </div>
+        
+        <div class="countries-count">
+          Showing <span id="countries-count-value">0</span> countries
+        </div>
+        
+        <div class="countries-table-container">
+          <table class="countries-table">
+            <thead>
+              <tr>
+                <th>Flag</th>
+                <th>Country</th>
+                <th>Capital</th>
+                <th>Continent</th>
+              </tr>
+            </thead>
+            <tbody id="countries-table-body">
+              <!-- Countries will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+        <button id="back-to-home-btn" class="primary-btn">Back to Home</button>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Geo Quest PWA - Learn country flags around the world</p>
+    </footer>
+  </div>
+  
+  <script src="app.js"></script>
+  <script>
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service worker registered'))
+          .catch(err => console.log('Service worker registration failed', err));
+      });
+    }
+  </script>
+</body>
+</html>
