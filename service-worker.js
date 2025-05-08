@@ -1,12 +1,12 @@
 const CACHE_NAME = 'flag-quiz-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
-  '/data/country.json',
-  '/favicon.ico'
+  '/geo-quest/',
+  '/geo-quest/index.html',
+  '/geo-quest/styles.css',
+  '/geo-quest/app.js',
+  '/geo-quest/manifest.json',
+  '/geo-quest/data/country.json',
+  '/geo-quest/favicon.ico'
 ];
 
 // Install event - cache assets
